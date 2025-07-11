@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "5fa8acf4-956c-4513-a388-dfb683bc6750",
+		"name": "URL Shortener API",
+		"description": "Postman collection to test all endpoints of the URL Shortener Assignment including optional and bonus features.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29100520",
+		"_collection_link": "https://www.postman.com/joint-operations-explorer-53856178/workspace/ai-text-summarizer-app/collection/29100520-5fa8acf4-956c-4513-a388-dfb683bc6750?action=share&source=collection_link&creator=29100520"
+	},
+	"item": [
+		{
+			"name": "POST /shorten (no expiry)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"url\": \"https://example.com/test\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/shorten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"shorten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /shorten (with expiryMinutes)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"url\": \"https://example.com/expiring\",\n  \"expiryMinutes\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/shorten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"shorten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /:code (valid redirection)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/abc123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"abc123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /:code (expired)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/expired123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"expired123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /:code (invalid code)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/invalidcode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"invalidcode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate limit test (exceed 10/min)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"url\": \"https://example.com/spam\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/shorten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"shorten"
+					]
+				},
+				"description": "Try making POST request continuously for 10 times within a minute. If you make POST request for 11th time it stops you and returns like Too many requests, Try after sometime. That's how Rate Limiting works"
+			},
+			"response": []
+		}
+	]
+}
