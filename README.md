@@ -1,4 +1,4 @@
-# Mini URL Shortener API
+# URL Shortener API
 
 A simple backend API that allows users to shorten long URLs, redirect using a short code, and track usage with optional features like expiry and rate limiting.
 
@@ -68,4 +68,4 @@ The server runs on: http://localhost:5000
 ## Submission
 
 - GitHub repo link
-- (Optional) Postman collection file (if created)
+- Postman collection file (Included in github repository with name "url-shortener.postman_collection.json")
